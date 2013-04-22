@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=com.redhat.virt.manager
+Exec=/usr/local/libexec/virt-manager-launch
