@@ -122,6 +122,7 @@ class LibvirtWorker:
         '''Returns the capabilities for this libvirt host.'''
         return self.__capabilities
 
+	#列出光驱
     def list_installable_volumes(self):
         '''
         Return a list of host CDROM devices that have media in them
@@ -500,6 +501,7 @@ class LibvirtWorker:
         self.__guest.sound_devs = []
         self.__guest.sound_devs.append(virtinst.VirtualAudio(model="es1370"))
 
+		#设置网卡
         self._setup_nics(config)
         self._setup_disks(config)
 
@@ -518,6 +520,7 @@ class LibvirtWorker:
             network = self.__conn.networkLookupByName(config.get_network_bridge())
             network.create()
 
+	#设置磁盘
     def _setup_disks(self, config):
         self.__guest.disks = []
         if config.get_enable_storage():

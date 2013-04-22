@@ -288,7 +288,7 @@ class IPint:
 
     def strBin(self, wantprefixlen = None):
         """Return a string representation as a binary value.
-
+		返回一个二进制的串
         >>> print IP('127.0.0.1').strBin()
         01111111000000000000000000000001
         """
@@ -1171,7 +1171,7 @@ def _intToBin(val):
 
     if val < 0:
         raise ValueError, "Only positive values allowed"
-    s = hex(val).lower()
+    s = hex(val).lower()  #hex() 将一个整数转换为一个十六进制字符串  .lower() 转化为小写
     ret = ''
     if s[-1] == 'l':
         s = s[:-1]
