@@ -25,6 +25,7 @@ import libxml2
 
 from virtManager.baseclass import vmmGObject
 
+#消除<?...>
 def _sanitize_xml(xml):
     xml = libxml2.parseDoc(xml).serialize()
     # Strip starting <?...> line
@@ -101,6 +102,8 @@ class vmmLibvirtObject(vmmGObject):
         # changed since last refresh
 
         origxml = self._xml
+        
+        #使xml无效
         self._invalidate_xml()
         self._xml = self._XMLDesc(self._active_xml_flags)
         self._is_xml_valid = True
@@ -112,6 +115,7 @@ class vmmLibvirtObject(vmmGObject):
     # Internal XML cache/update routines #
     ######################################
 
+	#使xml无效
     def _invalidate_xml(self):
         # Mark cached xml as invalid
         self._is_xml_valid = False
@@ -127,6 +131,7 @@ class vmmLibvirtObject(vmmGObject):
         origxml = _sanitize_xml(origxml)
         newxml  = _sanitize_xml(newxml)
         if origxml != newxml:
+        	#unified_diff->For two lists of strings, return a delta in unified diff format.
             diff = "".join(difflib.unified_diff(origxml.splitlines(1),
                                                 newxml.splitlines(1),
                                                 fromfile="Original XML",

@@ -55,6 +55,7 @@ def setup_logging(appname, debug_stdout):
                                (vm_dir, e))
 
     filename = "%s/%s" % (vm_dir, FILE_NAME)
+    #help(logging.getLogger)
     rootLogger = logging.getLogger()
     rootLogger.setLevel(logging.DEBUG)
     fileHandler = logging.handlers.RotatingFileHandler(filename,

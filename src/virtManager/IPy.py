@@ -81,9 +81,9 @@ class IPint:
     def __init__(self, data, ipversion=0, make_net=0):
         """Create an instance of an IP object.
 
-        Data can be a network specification or a single IP. IP
+        Data can be a network specification(规范) or a single IP. IP
         addresses can be specified in all forms understood by
-        parseAddress(). The size of a network can be specified as
+        parseAddress(). The size of a network can be specified(指定) as
 
         /prefixlen        a.b.c.0/24               2001:658:22a:cafe::/64
         -lastIP           a.b.c.0-a.b.c.255        2001:658:22a:cafe::-2001:658:22a:cafe:ffff:ffff:ffff:ffff
@@ -141,6 +141,12 @@ class IPint:
             # TODO: refactor me!
             # splitting of a string into IP and prefixlen et. al.
             x = data.split('-')
+            '''
+			split(…)
+			S.split([sep [,maxsplit]]) -> 由字符串分割成的列表
+			返回一组使用分隔符（sep）分割字符串形成的列表。如果指定最大分割数，
+			则在最大分割时结束。如果分隔符未指定或者为none，则分隔符默认为空格
+            '''
             if len(x) == 2:
                 # a.b.c.0-a.b.c.255 specification ?
                 (ip, last) = x
@@ -971,6 +977,16 @@ def _parseAddressIPv6(ipstr):
             fill_pos = len(items)
             index += 2
             continue
+        '''
+        函数原型：find(str, pos_start, pos_end)
+
+		解释：
+
+		str:被查找“字串”
+		pos_start:查找的首字母位置（从0开始计数。默认：0）
+		pos_end: 查找的末尾位置（默认-1）
+		返回值：如果查到：返回查找的第一个出现的位置。否则，返回-1。
+        '''
         pos = text.find(':')
         if pos == 0:
             # Invalid IPv6, eg. '1::2:'
@@ -1027,7 +1043,7 @@ def _parseAddressIPv6(ipstr):
 
 def parseAddress(ipstr):
     """
-    Parse a string and return the corresponding IP address (as integer)
+    Parse a string and return the corresponding(对应的) IP address (as integer)
     and a guess of the IP version.
 
     Following address formats are recognized:
@@ -1056,6 +1072,7 @@ def parseAddress(ipstr):
     (281472855454758L, 6)
     """
 
+	#如果是0x打头
     if ipstr.startswith('0x'):
         ret = long(ipstr[2:], 16)
         if ret > 0xffffffffffffffffffffffffffffffffL:
