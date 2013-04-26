@@ -40,6 +40,7 @@ from virtManager.graphwidgets import Sparkline
 INTERFACE_PAGE_INFO = 0
 INTERFACE_PAGE_ERROR = 1
 
+#Edit->Connection Details
 class vmmHost(vmmGObjectUI):
     def __init__(self, conn):
         vmmGObjectUI.__init__(self, "vmm-host.ui", "vmm-host")
@@ -164,6 +165,7 @@ class vmmHost(vmmGObjectUI):
 
         self.populate_networks(netListModel)
 
+	#Edit->Connection Details->Storage
     def init_storage_state(self):
         self.widget("storage-pages").set_show_tabs(False)
 
@@ -214,6 +216,7 @@ class vmmHost(vmmGObjectUI):
         populate_storage_pools(self.widget("pool-list"),
                                self.conn)
 
+		#Edit->Connection Details->Network Interfaces
     def init_interface_state(self):
         self.widget("interface-pages").set_show_tabs(False)
 
@@ -259,7 +262,9 @@ class vmmHost(vmmGObjectUI):
 
         self.populate_interfaces(interfaceListModel)
 
+	#Edit->Connection Details
     def init_conn_state(self):
+    	#Basic details
         uri = self.conn.get_uri()
         host = self.conn.get_hostname()
         drv = self.conn.get_driver()
@@ -276,9 +281,11 @@ class vmmHost(vmmGObjectUI):
         self.widget("overview-arch").set_text(arch)
         self.widget("config-autoconnect").set_active(auto)
 
+		#Performance
         self.cpu_usage_graph = Sparkline()
         self.cpu_usage_graph.show()
-        self.widget("performance-table").attach(self.cpu_usage_graph,                                                           1, 2, 0, 1)
+        self.widget("performance-table").attach(self.cpu_usage_graph,                              
+        										1, 2, 0, 1)
 
         self.memory_usage_graph = Sparkline()
         self.memory_usage_graph.show()

@@ -105,6 +105,7 @@ class vmmEngine(vmmGObject):
         # keep running in system tray if enabled
         self.windows = 0
 
+		#œµÕ≥Õ–≈Ã
         self.init_systray()
 
         self.add_gconf_handle(
